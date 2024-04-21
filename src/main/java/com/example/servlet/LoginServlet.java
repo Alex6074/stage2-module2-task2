@@ -15,10 +15,10 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        String login = (String) req.getParameter("login");
-        String password = (String) req.getParameter("password");
+        String login = req.getParameter("login");
+        String password = req.getParameter("password");
 
-        if (password != null && !password.trim().isEmpty() && Users.getInstance().getUsers().contains(login)) {
+        if (login != null && password != null && !password.trim().isEmpty() && Users.getInstance().getUsers().contains(login)) {
             session.setAttribute("user", login);
             req.getRequestDispatcher("/user/hello.jsp").forward(req, resp);
         } else {
